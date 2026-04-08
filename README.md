@@ -204,7 +204,7 @@ Config stored at `~/.bsp/config.json`.
 │              │ ←──────────────────  │                  │ ←──────────────  │          │
 └──────────────┘    JSON response     └──────────────────┘    state read    └──────────┘
        ↑
-       │ @bsp/sdk
+       │ bsp-sdk
        │ Ed25519 signing
        │ type definitions
 ```
@@ -289,9 +289,9 @@ The CLI prints human-readable errors and exits with code 1 on failure:
 
 | Package | Description |
 |---------|-------------|
-| [@bsp/sdk](https://github.com/Biological-Sovereignty-Protocol/bsp-sdk-typescript) | TypeScript SDK — programmatic access |
+| [bsp-sdk](https://github.com/Biological-Sovereignty-Protocol/bsp-sdk-typescript) | TypeScript SDK — programmatic access |
 | [bsp-sdk-python](https://github.com/Biological-Sovereignty-Protocol/bsp-sdk-python) | Python SDK |
-| [@bsp/mcp](https://github.com/Biological-Sovereignty-Protocol/bsp-mcp) | MCP server — connect AI agents to BSP |
+| [bsp-mcp](https://github.com/Biological-Sovereignty-Protocol/bsp-mcp) | MCP server — connect AI agents to BSP |
 | [bsp-id-web](https://github.com/Biological-Sovereignty-Protocol/bsp-id-web) | Web identity app |
 | [bsp-spec](https://github.com/Biological-Sovereignty-Protocol/bsp-spec) | Protocol specification |
 | [bsp-docs](https://github.com/Biological-Sovereignty-Protocol/bsp-docs) | Documentation |
