@@ -1,4 +1,4 @@
-[![npm version](https://img.shields.io/npm/v/@bsp/cli.svg)](https://www.npmjs.com/package/@bsp/cli)
+[![npm version](https://img.shields.io/npm/v/bspctl.svg)](https://www.npmjs.com/package/bspctl)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green.svg)](https://nodejs.org)
@@ -7,7 +7,7 @@
 
 <br />
 
-# @bsp/cli
+# bspctl
 
 Official command-line interface for the [Biological Sovereignty Protocol](https://biologicalsovereigntyprotocol.com).
 
@@ -20,13 +20,13 @@ Create and manage biological identities (BEOs), institutional entities (IEOs), c
 ## Installation
 
 ```bash
-npm install -g @bsp/cli
+npm install -g bspctl
 ```
 
 Or run without installing:
 
 ```bash
-npx @bsp/cli --help
+npx bspctl --help
 ```
 
 Requires Node.js >= 18.
@@ -263,7 +263,7 @@ bsp consent revoke-all <patientBeoId> --confirm
 | Property | Implementation |
 |----------|---------------|
 | **Key storage** | `~/.bsp/config.json` — local, never transmitted |
-| **Signing** | Ed25519 via `@bsp/sdk` (tweetnacl) — deterministic, auditable |
+| **Signing** | Ed25519 via `bsp-sdk` (tweetnacl) — deterministic, auditable |
 | **Transport** | Only signed payloads cross the network |
 | **Replay protection** | Nonce (16+ chars) + timestamp (max 5 min) on every request |
 | **Destructive ops** | `--confirm` flag required — no accidental erasure |
