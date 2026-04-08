@@ -1,5 +1,5 @@
 import { Command } from 'commander'
-import { CryptoUtils } from '@bsp/sdk'
+import { CryptoUtils } from '@biological-sovereignty-protocol/sdk'
 import { readFileSync } from 'fs'
 import { loadConfig } from '../lib/config.js'
 import * as api from '../lib/api.js'
