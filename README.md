@@ -3,7 +3,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green.svg)](https://nodejs.org)
 [![BSP](https://img.shields.io/badge/BSP-v0.2_Protocol-0066CC.svg)](https://biologicalsovereigntyprotocol.com)
-[![Built on Arweave](https://img.shields.io/badge/Permanent_Storage-Arweave-222222.svg)](https://arweave.org)
+[![Built on Aptos](https://img.shields.io/badge/Built_on-Aptos-222222.svg)](https://aptoslabs.com)
 
 <br />
 
@@ -197,9 +197,9 @@ Config stored at `~/.bsp/config.json`.
 ## Architecture
 
 ```
-┌──────────────┐    signed payload    ┌──────────────────┐    Arweave TX    ┌──────────┐
+┌──────────────┐    signed payload    ┌──────────────────┐    Aptos TX     ┌──────────┐
 │              │ ──────────────────→  │                  │ ──────────────→  │          │
-│   bsp CLI    │    Ed25519 sig       │  Registry API    │    pays gas      │ Arweave  │
+│   bsp CLI    │    Ed25519 sig       │  Registry API    │    pays gas      │  Aptos   │
 │   (local)    │                      │  (gasless relay)  │                  │ (on-chain)│
 │              │ ←──────────────────  │                  │ ←──────────────  │          │
 └──────────────┘    JSON response     └──────────────────┘    state read    └──────────┘
@@ -211,7 +211,7 @@ Config stored at `~/.bsp/config.json`.
 
 - **Keys never leave your machine** — all cryptographic operations happen locally
 - **The relayer is a gas payer, not an authority** — it cannot forge or modify your actions
-- **Smart contracts verify every signature on-chain** — even a compromised relayer cannot cheat
+- **Move smart contracts verify every signature on-chain** — even a compromised relayer cannot cheat
 
 ---
 

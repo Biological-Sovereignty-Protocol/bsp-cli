@@ -43,8 +43,8 @@ export function registerExchangeCommands(program: Command) {
 
                 success(`${result.record_ids.length} record(s) submitted`)
                 info(`Request ID: ${result.request_id}`)
-                for (let i = 0; i < result.arweave_txs.length; i++) {
-                    info(`  ${result.record_ids[i]} → ${result.arweave_txs[i]}`)
+                for (let i = 0; i < result.tx_hashes.length; i++) {
+                    info(`  ${result.record_ids[i]} → ${result.tx_hashes[i]}`)
                 }
             } catch (e: any) {
                 error(e.message)

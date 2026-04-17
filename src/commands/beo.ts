@@ -29,7 +29,7 @@ export function registerBEOCommands(program: Command) {
                     'Domain': domain,
                     'BEO ID': result.transactionId,
                     'Public Key': publicKey.slice(0, 16) + '...',
-                    'Arweave TX': result.transactionId,
+                    'TX': result.transactionId,
                 })
                 console.log()
                 warn('CRITICAL — Store these securely. They are shown ONCE.')
