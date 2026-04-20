@@ -1,6 +1,6 @@
 {
   "name": "@biological-sovereignty-protocol/cli",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "Official CLI for the Biological Sovereignty Protocol — manage BEOs, IEOs, consent, and health data from the terminal",
   "bin": {
     "bsp": "./dist/index.js"

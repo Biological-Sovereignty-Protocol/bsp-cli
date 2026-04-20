@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [2.1.0] — 2026-04
+
+### Changed
+
+- Sync version with `@biological-sovereignty-protocol/sdk` v2.1.0 so the
+  entire BSP client stack (sdk, cli, mcp, website) shares one line.
+
 ### Added
+
 - `examples/` directory with runnable bash scripts for the three core flows:
   - `create-beo.sh` — bootstrap a sovereign biological identity
   - `grant-consent.sh` — issue a ConsentToken to an IEO
@@ -17,7 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CONTRIBUTING.md` with dev setup, testing, and PR guidelines
 - Expanded README with per-command reference tables and flag documentation
 
-### Changed
+### Changed (docs)
+
 - Documentation consolidated with cross-links to bsp-spec glossary and error catalog
 
 ---
