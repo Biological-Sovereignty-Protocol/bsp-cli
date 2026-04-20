@@ -23,6 +23,18 @@ Create and manage biological identities (BEOs), institutional entities (IEOs), c
 npm install -g bspctl
 ```
 
+### Shell completions
+
+After installing, add completions to your shell:
+
+```bash
+# bash — add to ~/.bashrc
+eval "$(bsp completions bash)"
+
+# zsh — add to ~/.zshrc
+eval "$(bsp completions zsh)"
+```
+
 Or run without installing:
 
 ```bash
