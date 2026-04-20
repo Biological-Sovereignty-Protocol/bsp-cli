@@ -26,4 +26,16 @@ registerIEOCommands(program)
 registerExchangeCommands(program)
 registerConfigCommands(program)
 
+program
+    .command('completions [shell]')
+    .description('Print shell completion script (bash|zsh). Usage: eval "$(bsp completions bash)"')
+    .action((shell = 'bash') => {
+        const cmds = ['beo', 'ieo', 'consent', 'record', 'config', 'completions']
+        if (shell === 'zsh') {
+            console.log(`compdef '_arguments "1: :(${cmds.join(' ')})"' bsp`)
+        } else {
+            console.log(`complete -W "${cmds.join(' ')}" bsp`)
+        }
+    })
+
 program.parse()
