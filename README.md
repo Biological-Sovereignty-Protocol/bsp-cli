@@ -285,6 +285,150 @@ The CLI prints human-readable errors and exits with code 1 on failure:
 
 ---
 
+## Command Reference — Detailed
+
+Every command, every flag, every example. Reach for this when you want exhaustive detail.
+
+### `bsp create <domain>`
+
+Create a new BEO. Generates an Ed25519 keypair **locally** — the private key never leaves your machine.
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `<domain>` | Yes | — | `.bsp` domain (e.g. `alice.bsp`) |
+| `--json` | No | off | Emit output as JSON for scripting |
+
+```bash
+bsp create alice.bsp
+bsp create alice.bsp --json > identity.json
+```
+
+### `bsp resolve <domain>`
+
+Resolve a BEO by its `.bsp` domain. Reads on-chain state — no signature required.
+
+```bash
+bsp resolve alice.bsp
+```
+
+### `bsp lock <beoId>` / `bsp unlock <beoId>`
+
+Emergency lock or unlock a BEO. Requires the holder's private key. Locked BEOs reject all operations until unlocked.
+
+### `bsp rotate-key <beoId>`
+
+Rotate the BEO's Ed25519 key. Increments `keyVersion`. Old signatures remain valid for past records.
+
+### `bsp destroy <beoId> --confirm`
+
+**IRREVERSIBLE.** Cryptographic erasure (LGPD Art. 18 / GDPR Art. 17). `--confirm` flag is mandatory.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `<beoId>` | Yes | Target BEO |
+| `--confirm` | Yes | Explicit confirmation — prevents accidental erasure |
+
+### `bsp consent grant <beoId> <ieoId>`
+
+Issue a ConsentToken to an institution.
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--intents <list>` | Yes | — | Comma-separated: `SUBMIT_RECORD`, `READ_RECORDS`, `ANALYZE_VITALITY`, `REQUEST_SCORE`, `EXPORT_DATA`, `SYNC_PROTOCOL` |
+| `--categories <list>` | No | all | Comma-separated BSP categories (e.g. `BSP-LA,BSP-CV`) |
+| `--days <n>` | No | permanent | Expiration in days |
+
+```bash
+bsp consent grant <beoId> <ieoId> \
+  --intents SUBMIT_RECORD,READ_RECORDS \
+  --categories BSP-LA,BSP-GL,BSP-HM \
+  --days 365
+```
+
+### `bsp consent revoke <tokenId> <beoId>`
+
+Revoke a single token. Effect is immediate on-chain.
+
+### `bsp consent revoke-all <beoId> --confirm`
+
+Revoke **every** active ConsentToken for a BEO. Use in emergency (lost device, compromised identity).
+
+### `bsp consent verify <tokenId>`
+
+Check if a token is valid — returns status (active / revoked / expired), intents, categories, expiry.
+
+### `bsp consent list <domain>`
+
+List all tokens for a BEO. Supports `--json`.
+
+### `bsp ieo create <domain>`
+
+Register a new IEO on the protocol.
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `<domain>` | Yes | — | Institution `.bsp` domain (e.g. `fleury.bsp`) |
+| `--type <type>` | Yes | — | `LAB` \| `HOSPITAL` \| `WEARABLE` \| `PHYSICIAN` \| `INSURER` \| `RESEARCH` \| `PLATFORM` |
+| `--name <str>` | Yes | — | Human-readable institution name |
+
+### `bsp ieo get <ieoId>` / `bsp ieo list`
+
+Retrieve IEO details or list IEOs. `list` supports filters: `--type`, `--status`, `--cert`.
+
+### `bsp ieo lock|unlock|destroy`
+
+Lifecycle operations on an IEO. `destroy` requires `--confirm`.
+
+### `bsp records submit <beoId>`
+
+Submit BioRecords from a JSON file. Signed by the IEO.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--token <tokenId>` | Yes | Active ConsentToken with `SUBMIT_RECORD` intent |
+| `--file <path>` | Yes | JSON file containing an array of BioRecord payloads |
+
+### `bsp records read <beoId>`
+
+Read BioRecords with filters.
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--token <tokenId>` | Yes | — | ConsentToken with `READ_RECORDS` intent |
+| `--categories <list>` | No | all | Comma-separated category codes |
+| `--from <date>` | No | — | ISO 8601 start date |
+| `--to <date>` | No | — | ISO 8601 end date |
+| `--json` | No | off | JSON output |
+
+### `bsp export <beoId>`
+
+Sovereign data export (GDPR Art. 20).
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--token <tokenId>` | Yes | — | Token with `EXPORT_DATA` intent |
+| `--format <fmt>` | No | `JSON` | `JSON` \| `CSV` \| `FHIR_R4` |
+
+### `bsp config set|get|show|path`
+
+Manage the config at `~/.bsp/config.json`. See the `Configuration` section above for recognized keys.
+
+---
+
+## Examples
+
+Runnable bash scripts in [`examples/`](./examples):
+
+- [`examples/create-beo.sh`](./examples/create-beo.sh) — bootstrap a sovereign biological identity
+- [`examples/grant-consent.sh`](./examples/grant-consent.sh) — issue a ConsentToken to an IEO
+- [`examples/submit-biorecord.sh`](./examples/submit-biorecord.sh) — submit measurements with scoped consent
+
+---
+
+## Changelog
+
+See [`CHANGELOG.md`](./CHANGELOG.md).
+
 ## Related Packages
 
 | Package | Description |
