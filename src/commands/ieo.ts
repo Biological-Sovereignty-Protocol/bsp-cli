@@ -2,7 +2,7 @@ import { Command } from 'commander'
 import { CryptoUtils } from '@biological-sovereignty-protocol/sdk'
 import { loadConfig } from '../lib/config.js'
 import * as api from '../lib/api.js'
-import { success, error, table, info, warn, requireKey } from '../lib/output.js'
+import { success, error, table, info, warn, requireKey, json, getOutputFormat } from '../lib/output.js'
 
 export function registerIEOCommands(program: Command) {
     const ieo = program.command('ieo').description('Manage Institutional Entity Objects')
@@ -130,6 +130,10 @@ export function registerIEOCommands(program: Command) {
                 const qs = params.toString()
 
                 const result = await api.get(`/api/ieos${qs ? '?' + qs : ''}`)
+                if (getOutputFormat() === 'json') {
+                    json(result.ieos)
+                    return
+                }
                 success(`${result.count} IEO(s) found`)
                 for (const ieo of result.ieos) {
                     console.log()

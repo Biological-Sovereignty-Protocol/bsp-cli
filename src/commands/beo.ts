@@ -2,7 +2,7 @@ import { Command } from 'commander'
 import { CryptoUtils } from '@biological-sovereignty-protocol/sdk'
 import { loadConfig } from '../lib/config.js'
 import * as api from '../lib/api.js'
-import { success, error, table, info, warn, requireKey } from '../lib/output.js'
+import { success, error, table, info, warn, requireKey, json, getOutputFormat } from '../lib/output.js'
 
 export function registerBEOCommands(program: Command) {
     const beo = program.command('create')
@@ -51,6 +51,10 @@ export function registerBEOCommands(program: Command) {
             try {
                 if (!domain.endsWith('.bsp')) domain += '.bsp'
                 const result = await api.get(`/api/beos/domain/${encodeURIComponent(domain)}`)
+                if (getOutputFormat() === 'json') {
+                    json(result.beo)
+                    return
+                }
                 success(`BEO found: ${domain}`)
                 console.log()
                 table({
